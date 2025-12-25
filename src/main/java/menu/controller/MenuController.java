@@ -1,9 +1,6 @@
 package menu.controller;
 
-import menu.model.Categories;
-import menu.model.ForbiddenMenus;
-import menu.model.Person;
-import menu.model.Persons;
+import menu.model.*;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -28,7 +25,7 @@ public class MenuController {
         Persons persons = getPersons();
         matchForbiddenMenus(persons);
 
-        new Categories();
+        Menus weeklyMenus = createWeeklyMenus(persons);
     }
 
     private <T> T retry(Supplier<T> supplier) {
@@ -51,7 +48,7 @@ public class MenuController {
     }
 
     private void matchForbiddenMenus(Persons persons) {
-        for (Person person : persons.getNames()) {
+        for (Person person : persons.getPersons()) {
             outputView.printForbiddenMenusPrompt(person.getName());
             ForbiddenMenus menus = retry(this::getForbiddenMenus);
             person.setForbiddenMenus(menus);
@@ -60,5 +57,10 @@ public class MenuController {
 
     private ForbiddenMenus getForbiddenMenus() {
         return new ForbiddenMenus(inputView.readForbiddenMenus());
+    }
+
+    private Menus createWeeklyMenus(Persons persons) {
+        Categories categories = new Categories();
+        return Menus.of(persons, categories);
     }
 }

@@ -18,4 +18,8 @@ public class ForbiddenMenus {
             throw new IllegalArgumentException(ErrorMessage.MENUS_OVER_MAXIMUM.getMessage());
         }
     }
+
+    public boolean contains(String menu) {
+        return menus.contains(menu);
+    }
 }

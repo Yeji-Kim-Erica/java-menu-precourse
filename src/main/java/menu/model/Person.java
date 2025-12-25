@@ -28,4 +28,8 @@ public class Person {
             throw new IllegalArgumentException(ErrorMessage.NAME_TOO_LONG.getMessage());
         }
     }
+
+    public boolean containsForbiddenMenus(String menu) {
+        return forbiddenMenus.contains(menu);
+    }
 }

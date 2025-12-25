@@ -12,6 +12,10 @@ public class Categories {
         setWeeklyCategories();
     }
 
+    public List<String> getMenus(int index) {
+        return categories.get(index).getMenus();
+    }
+
     private void setWeeklyCategories() {
         while(categories.size() < 5) {
             int categoryNumber = Randoms.pickNumberInRange(1, 5);

@@ -32,4 +32,8 @@ public enum Menu {
         }
         throw new IllegalArgumentException();
     }
+
+    public List<String> getMenus() {
+        return this.menus;
+    }
 }

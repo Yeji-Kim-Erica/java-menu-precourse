@@ -21,7 +21,7 @@ public class Persons {
         return new Persons(persons);
     };
 
-    public List<Person> getNames() {
+    public List<Person> getPersons() {
         return persons;
     }
 
