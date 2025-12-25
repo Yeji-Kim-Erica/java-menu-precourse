@@ -9,7 +9,10 @@ public enum ErrorMessage {
     NAME_TOO_SHORT("코치 이름은 2글자 이상이어야 합니다."),
     NAME_TOO_LONG("코치 이름은 4글자 이하여야 합니다."),
     PEOPLE_UNDER_MINIMUM("코치는 최소 2명 이상 입력해야 합니다."),
-    PEOPLE_OVER_MAXIMUM("코치는 최대 5명 이하로 입력해야 합니다.");
+    PEOPLE_OVER_MAXIMUM("코치는 최대 5명 이하로 입력해야 합니다."),
+
+    INVALID_MENU_FORMAT("메뉴명 입력 형식이 올바르지 않습니다."),
+    MENUS_OVER_MAXIMUM("메뉴는 최대 2개 이하로 입력해야 합니다.");
 
     private final String message;
 

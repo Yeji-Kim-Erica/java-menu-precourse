@@ -21,6 +21,10 @@ public class Persons {
         return new Persons(persons);
     };
 
+    public List<Person> getNames() {
+        return persons;
+    }
+
     private void validate(List<Person> persons) {
         int size = persons.size();
         if (size < 2) {

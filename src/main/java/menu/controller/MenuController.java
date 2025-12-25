@@ -1,5 +1,7 @@
 package menu.controller;
 
+import menu.model.ForbiddenMenus;
+import menu.model.Person;
 import menu.model.Persons;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -22,12 +24,8 @@ public class MenuController {
     public void run() {
         outputView.printStart();
 
-        Persons persons = retry(this::getPersons);
-    }
-
-    private Persons getPersons() {
-        outputView.printNamesPrompt();
-        return Persons.from(inputView.readNames());
+        Persons persons = getPersons();
+        matchForbiddenMenus(persons);
     }
 
     private <T> T retry(Supplier<T> supplier) {
@@ -38,5 +36,26 @@ public class MenuController {
                 outputView.printErrorMessage(e);
             }
         }
+    }
+
+    private Persons getPersons() {
+        outputView.printNamesPrompt();
+        return retry(this::parseNamesToPersons);
+    }
+
+    private Persons parseNamesToPersons() {
+        return Persons.from(inputView.readNames());
+    }
+
+    private void matchForbiddenMenus(Persons persons) {
+        for (Person person : persons.getNames()) {
+            outputView.printForbiddenMenusPrompt(person.getName());
+            ForbiddenMenus menus = retry(this::getForbiddenMenus);
+            person.setForbiddenMenus(menus);
+        }
+    }
+
+    private ForbiddenMenus getForbiddenMenus() {
+        return new ForbiddenMenus(inputView.readForbiddenMenus());
     }
 }

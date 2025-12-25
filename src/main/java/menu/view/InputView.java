@@ -15,4 +15,9 @@ public class InputView {
         String refinedInput = InputParser.refineInput(input, ErrorMessage.NAME_NULL_OR_BLANK.getMessage());
         return InputParser.parseToNames(refinedInput, ErrorMessage.INVALID_NAME_FORMAT.getMessage());
     }
+
+    public List<String> readForbiddenMenus() {
+        String input = Console.readLine();
+        return InputParser.parseToForbiddenMenus(input, ErrorMessage.INVALID_MENU_FORMAT.getMessage());
+    }
 }

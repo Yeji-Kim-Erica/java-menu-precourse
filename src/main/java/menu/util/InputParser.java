@@ -9,6 +9,14 @@ import java.util.List;
 public final class InputParser {
     private InputParser() {}
 
+    public static String refineInput(String input, String errorMessage) {
+        boolean isNullOrBlank = (input == null) || input.isBlank();
+        if (isNullOrBlank) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+        return input.trim();
+    }
+
     public static List<String> parseToNames(String input, String errorMessage) {
         List<String> result = new ArrayList<>();
         for (String name : input.split(",")){
@@ -18,11 +26,15 @@ public final class InputParser {
         return result;
     }
 
-    public static String refineInput(String input, String errorMessage) {
-        boolean isNullOrBlank = (input == null) || input.isBlank();
-        if (isNullOrBlank) {
-            throw new IllegalArgumentException(errorMessage);
+    public static List<String> parseToForbiddenMenus(String input, String errorMessage) {
+        List<String> result = new ArrayList<>();
+        if ((input == null) || input.isBlank()) {
+            return result;
         }
-        return input.trim();
+        for (String name : input.split(",")){
+            String refinedName = refineInput(name, errorMessage);
+            result.add(refinedName);
+        };
+        return result;
     }
 }
