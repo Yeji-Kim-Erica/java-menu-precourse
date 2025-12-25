@@ -1,6 +1,11 @@
 package menu.view;
 
-import menu.model.Persons;
+import menu.model.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import static java.lang.System.out;
 
@@ -9,10 +14,6 @@ import static java.lang.System.out;
  */
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
-
-    public void printBlankLine() {
-        out.println();
-    }
 
     public void printErrorMessage(IllegalArgumentException e) {
         out.println(ERROR_PREFIX + e.getMessage());
@@ -30,5 +31,32 @@ public class OutputView {
     public void printForbiddenMenusPrompt(String name) {
         printBlankLine();
         out.printf("%s(이)가 못 먹는 메뉴를 입력해 주세요.\n", name);
+    };
+
+    public void printWeeklyMenus(Menus menus) {
+        printBlankLine();
+        out.println("메뉴 추천 결과입니다.");
+        out.println("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
+        printWeeklyCategories(menus.getCategories());
+        printWeeklyMenuResult(menus);
+    };
+
+    private void printBlankLine() {
+        out.println();
+    }
+
+    private void printWeeklyCategories(Categories categories) {
+        List<String> weeklyCategories = new ArrayList<>();
+        for (int i = 0; i < categories.size(); i++) {
+            weeklyCategories.add(categories.getCategory(i).toString());
+        }
+        out.printf("[ 카테고리 | %s ]\n", String.join(" | ", weeklyCategories));
+    };
+
+    private void printWeeklyMenuResult(Menus menus) {
+        Map<Person, List<String>> matchingWeeklyMenus = menus.getMatchingWeeklyMenus();
+        for (Entry<Person, List<String>> entry : matchingWeeklyMenus.entrySet()) {
+            out.printf("[ %s | %s ]\n", entry.getKey(), String.join(" | ", entry.getValue()));
+        }
     };
 }

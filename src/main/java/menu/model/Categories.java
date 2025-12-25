@@ -16,6 +16,14 @@ public class Categories {
         return categories.get(index).getMenus();
     }
 
+    public int size() {
+        return categories.size();
+    }
+
+    public Menu getCategory(int index) {
+        return categories.get(index);
+    }
+
     private void setWeeklyCategories() {
         while(categories.size() < 5) {
             int categoryNumber = Randoms.pickNumberInRange(1, 5);

@@ -32,4 +32,9 @@ public class Person {
     public boolean containsForbiddenMenus(String menu) {
         return forbiddenMenus.contains(menu);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

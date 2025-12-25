@@ -2,15 +2,14 @@ package menu.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Menus {
+    private final Categories categories;
     private final Map<Person, List<String>> matchingWeeklyMenus;
 
-    private Menus(Map<Person, List<String>> matchingWeeklyMenus) {
+    private Menus(Categories categories, Map<Person, List<String>> matchingWeeklyMenus) {
+        this.categories = categories;
         this.matchingWeeklyMenus = matchingWeeklyMenus;
     }
 
@@ -20,7 +19,15 @@ public class Menus {
             List<String> weeklyMenus = getWeeklyMenus(person, categories);
             matchingWeeklyMenus.put(person, weeklyMenus);
         }
-        return new Menus(matchingWeeklyMenus);
+        return new Menus(categories, matchingWeeklyMenus);
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public Map<Person, List<String>> getMatchingWeeklyMenus() {
+        return Collections.unmodifiableMap(matchingWeeklyMenus);
     }
 
     private static List<String> getWeeklyMenus(Person person, Categories categories) {

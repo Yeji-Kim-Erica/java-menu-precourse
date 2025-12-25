@@ -26,6 +26,7 @@ public class MenuController {
         matchForbiddenMenus(persons);
 
         Menus weeklyMenus = createWeeklyMenus(persons);
+        outputView.printWeeklyMenus(weeklyMenus);
     }
 
     private <T> T retry(Supplier<T> supplier) {

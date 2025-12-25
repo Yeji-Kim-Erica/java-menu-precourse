@@ -36,4 +36,9 @@ public enum Menu {
     public List<String> getMenus() {
         return this.menus;
     }
+
+    @Override
+    public String toString() {
+        return category;
+    }
 }
