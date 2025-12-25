@@ -1,5 +1,6 @@
 package menu.controller;
 
+import menu.model.Categories;
 import menu.model.ForbiddenMenus;
 import menu.model.Person;
 import menu.model.Persons;
@@ -26,6 +27,8 @@ public class MenuController {
 
         Persons persons = getPersons();
         matchForbiddenMenus(persons);
+
+        new Categories();
     }
 
     private <T> T retry(Supplier<T> supplier) {

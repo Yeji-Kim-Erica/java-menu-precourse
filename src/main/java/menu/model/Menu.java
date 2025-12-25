@@ -23,4 +23,13 @@ public enum Menu {
         this.category = category;
         this.menus = menus;
     }
+
+    public static Menu getCategory(int number) {
+        for (Menu menu : Menu.values()) {
+            if (menu.number == number) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 }
