@@ -2,6 +2,8 @@ package menu.model;
 
 import menu.error.ErrorMessage;
 
+import java.util.List;
+
 public class Person {
     private final String name;
     private ForbiddenMenus forbiddenMenus;

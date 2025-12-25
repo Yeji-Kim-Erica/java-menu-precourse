@@ -3,6 +3,7 @@ package menu.model;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Menus {
     private final Categories categories;
@@ -16,8 +17,16 @@ public class Menus {
     public static Menus of(Persons persons, Categories categories) {
         Map<Person, List<String>> matchingWeeklyMenus = new LinkedHashMap<>();
         for (Person person : persons.getPersons()) {
-            List<String> weeklyMenus = getWeeklyMenus(person, categories);
-            matchingWeeklyMenus.put(person, weeklyMenus);
+            matchingWeeklyMenus.put(person, new ArrayList<>());
+        }
+
+        for (int i = 0; i < 5; i++) {
+            Menu category = categories.getCategory(i);
+            for (Entry<Person, List<String>> entry : matchingWeeklyMenus.entrySet()) {
+                Person person = entry.getKey();
+                List<String> weeklyMenus = entry.getValue();
+                setWeeklyMenus(person, weeklyMenus, category);
+            }
         }
         return new Menus(categories, matchingWeeklyMenus);
     }
@@ -30,16 +39,12 @@ public class Menus {
         return Collections.unmodifiableMap(matchingWeeklyMenus);
     }
 
-    private static List<String> getWeeklyMenus(Person person, Categories categories) {
-        List<String> weeklyMenus = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            List<String> menus = categories.getMenus(i);
-            String menu = Randoms.shuffle(menus).get(0);
-            while (weeklyMenus.contains(menu) || person.containsForbiddenMenus(menu)) {
-                menu = Randoms.shuffle(menus).get(0);
-            }
-            weeklyMenus.add(menu);
-        }
-        return weeklyMenus;
+    private static void setWeeklyMenus(Person person, List<String> weeklyMenus, Menu category) {
+        List<String> menus = category.getMenus();
+        String menu;
+        do {
+            menu = Randoms.shuffle(menus).get(0);
+        } while (weeklyMenus.contains(menu) || person.containsForbiddenMenus(menu));
+        weeklyMenus.add(menu);
     }
 }

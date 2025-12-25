@@ -27,6 +27,8 @@ public class MenuController {
 
         Menus weeklyMenus = createWeeklyMenus(persons);
         outputView.printWeeklyMenus(weeklyMenus);
+
+        outputView.printEnd();
     }
 
     private <T> T retry(Supplier<T> supplier) {

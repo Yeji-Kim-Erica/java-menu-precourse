@@ -12,10 +12,6 @@ public class Categories {
         setWeeklyCategories();
     }
 
-    public List<String> getMenus(int index) {
-        return categories.get(index).getMenus();
-    }
-
     public int size() {
         return categories.size();
     }

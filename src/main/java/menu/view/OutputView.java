@@ -41,6 +41,11 @@ public class OutputView {
         printWeeklyMenuResult(menus);
     };
 
+    public void printEnd() {
+        printBlankLine();
+        out.println("추천을 완료했습니다.");
+    };
+
     private void printBlankLine() {
         out.println();
     }
